@@ -1,26 +1,151 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+ * Ramp design tokens.
+ * Every color below was sampled from production screenshots. Use the Tailwind
+ * utilities these generate (bg-sidebar, text-ink-2, border-line, ...) instead of
+ * hard-coded hex values in components.
+ */
+@theme {
+  --font-sans: var(--font-lausanne), "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Canvas */
+  --color-canvas: #ffffff;
+  --color-sidebar: #f4f2f0; /* sidebar + rail background */
+  --color-sidebar-group: #e8e4e1; /* expanded nav group / hover */
+  --color-sidebar-hover: #ebe8e5;
+  --color-subtle: #fcfbf9; /* toolbar band, side cards */
+  --color-muted: #f4f2f0; /* disabled button bg, gray fills */
+  --color-chip: #e8e4e1; /* count pills, locked filter chips */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Ink (text) */
+  --color-ink: #0b090a; /* titles, primary values */
+  --color-ink-1: #1f1c1b; /* body text, table cells */
+  --color-ink-2: #605c5b; /* secondary text, nav labels */
+  --color-ink-3: #75716f; /* tertiary text, column headers */
+  --color-ink-4: #a7a2a0; /* placeholders, disabled */
+  --color-ink-5: #c4c0be;
+
+  /* Lines */
+  --color-line: #ebe9e8;
+  --color-line-strong: #d9d6d3;
+  --color-line-soft: #f3f3f3;
+
+  /* Brand */
+  --color-lime: #e7f256; /* primary CTA */
+  --color-lime-hover: #dce84a;
+  --color-lime-soft: #f8fb8c; /* sidebar counters */
+  --color-lime-bright: #f5ff78; /* "New" tags */
+  --color-lime-ink: #34340c;
+
+  /* Semantic */
+  --color-positive: #00a63c; /* savings, cashback (Insights) */
+  --color-money: #3d7843; /* estimated cashback (Vendors) */
+  --color-success-ink: #32664b;
+  --color-success-line: #4e8f50;
+  --color-success-bg: #f4fff9;
+  --color-approve: #3d7156;
+  --color-approve-line: #4a675b;
+  --color-warning: #ff4500;
+  --color-flag: #b1503e;
+  --color-danger: #d23f2f;
+  --color-danger-bg: #fff3f1;
+  --color-caution: #9b7a1e;
+  --color-caution-bg: #fdf6df;
+  --color-attention: #e5a50a;
+  --color-pending: #c9b458;
+  --color-info: #2f5fd0;
+  --color-info-bg: #eef3ff;
+
+  /* Charts */
+  --color-chart-plum: #5f545d;
+  --color-chart-plum-fill: #b8a5b4;
+  --color-chart-sage: #6f7a6a;
+  --color-chart-sage-fill: #a6aca1;
+  --color-chart-sand: #dcdcc9;
+
+  /* Horizontal page gutter used by headers, tabs and toolbars. */
+  --spacing-page: 52px;
+
+  --shadow-pop: 0 8px 24px -4px rgb(31 28 27 / 0.12), 0 2px 6px -1px rgb(31 28 27 / 0.06);
+  --shadow-card: 0 1px 2px rgb(31 28 27 / 0.04);
+
+  --animate-toast-in: toast-in 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  --animate-fade-in: fade-in 160ms ease-out;
+  --animate-pop-in: pop-in 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  @keyframes toast-in {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      transform: scale(0.98) translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    background: var(--color-canvas);
+    color: var(--color-ink-1);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.4;
+    font-feature-settings: "ss01", "cv11";
+  }
+  button {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: default;
+  }
+  ::selection {
+    background: var(--color-lime-bright);
+    color: var(--color-ink);
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@utility scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: #c9c5c2 transparent;
+}
+
+@keyframes drawer-in {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }

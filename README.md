@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# gRamp
 
-## Getting Started
+A high-fidelity replica of the Ramp admin app, built with Next.js 16 (App Router), React 19, Tailwind CSS v4, lucide-react and recharts. All data is sample data; nothing talks to a backend.
 
-First, run the development server:
+## Run it
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## What's inside
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Shell**: collapsible sidebar (⌘\ toggles the icon rail), ⌘K command palette, toasts.
+- **Screens**: Home, Inbox, Insights, My Ramp, Assistant, Expenses & travel, Funds & cards, Spend programs, Procurement, Bill Pay, Accounting (Ramp Card, Reimbursements, Payments, Treasury), Cash & Treasury, Company, Vendors (Overview, Renewals, Migrate payments, vendor detail, Price Intelligence, Seat Intelligence), Settings, Refer & earn, Help.
+- **Interactions**: editable table rows, bulk selection, detail drawers, dialogs, live tab counts.
 
-## Learn More
+## Project layout
 
-To learn more about Next.js, take a look at the following resources:
+| Path | Contents |
+| --- | --- |
+| `src/app/globals.css` | Design tokens (colors, gutter, animations) as Tailwind v4 `@theme` |
+| `src/components/ui/` | Shared primitives: buttons, tabs, tables, toolbars, forms, overlays, logos |
+| `src/components/shell/` | Sidebar, navigation config, command palette |
+| `src/components/<area>/` | Feature components per product area |
+| `src/data/` | Typed sample data |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+See [CONVENTIONS.md](./CONVENTIONS.md) for the design rules and component guide.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Notes
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Ramp uses the commercial TWK Lausanne typeface; this project substitutes Inter Tight (set in `src/app/layout.tsx`).
+- Merchant logos are lightweight SVG approximations with a monogram fallback.
